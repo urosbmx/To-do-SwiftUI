@@ -97,7 +97,6 @@ struct ContentView: View {
                 VStack{
                     Text("All Tasks")
                         .font(.title)
-                        .fontWeight(.bold)
                 }
                 TextField("Entre title", text: $title)
                     .textFieldStyle(.roundedBorder)
