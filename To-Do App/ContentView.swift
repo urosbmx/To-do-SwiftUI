@@ -49,6 +49,7 @@ private func styleForPriority(_ value: String) -> Color {
 struct ContentView: View {
     @State private var title: String = ""
     @State private var selectedPriority: Prirorited = .medium
+    @State private var showingAlert = false
     @Environment (\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "dataCreated", ascending: false)]) private var allTasks: FetchedResults<Task>
     
@@ -91,11 +92,12 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack{
-            Text("All Tasks")
-                .font(.title)
-        }
+       
             VStack{
+                VStack{
+                    Text("All Tasks")
+                        .font(.title)
+                }
                 TextField("Entre title", text: $title)
                     .textFieldStyle(.roundedBorder)
                 Picker("Prirorite", selection: $selectedPriority){
@@ -122,29 +124,26 @@ struct ContentView: View {
                                             updateTask(task)
                                         }
                                 }
-                                
-                         
-                         
                         }.onDelete(perform: deleteTask)
                     }
                     
                 }
- 
 
                 Spacer()
                 Button("Save"){
                     if(self.title == ""){
                         print("empty")
-              
-
-                    }else{
+                        showingAlert=true
+            
+                    }
+                    else{
                         saveTask()
                         self.title = ""
                     }
-                }
+                }.alert("Title can't be empty", isPresented: $showingAlert ){Button("OK"){}}
                 
                 .padding(10)
-                .frame(width: 200)
+                .frame(maxWidth: .infinity)
                 
                 .background(.blue)
                 .foregroundColor(.white)
