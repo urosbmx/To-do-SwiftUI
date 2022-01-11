@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct To_Do_AppApp: App {
+    
+    let contatiner = CoreDataMenager.shered.container
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(\.managedObjectContext,contatiner.viewContext)
         }
     }
 }
