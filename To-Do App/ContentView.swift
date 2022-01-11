@@ -50,7 +50,6 @@ struct ContentView: View {
     @State private var title: String = ""
     @State private var selectedPriority: Prirorited = .medium
     @Environment (\.managedObjectContext) private var viewContext
-    
     @FetchRequest(entity: Task.entity(), sortDescriptors: [NSSortDescriptor(key: "dataCreated", ascending: false)]) private var allTasks: FetchedResults<Task>
     
     private func saveTask(){
@@ -62,11 +61,10 @@ struct ContentView: View {
             try viewContext.save()
             
             
-        }catch{
-            print(error.localizedDescription)
-        }
-        
-        
+            }
+        catch{
+                print(error.localizedDescription)
+            }
     }
     
     private func updateTask(_ task: Task){
@@ -91,8 +89,12 @@ struct ContentView: View {
             }
         }
     }
+    
     var body: some View {
-        NavigationView{
+        VStack{
+            Text("All Tasks")
+                .font(.title)
+        }
             VStack{
                 TextField("Entre title", text: $title)
                     .textFieldStyle(.roundedBorder)
@@ -127,11 +129,14 @@ struct ContentView: View {
                     }
                     
                 }
-         
+ 
+
                 Spacer()
                 Button("Save"){
                     if(self.title == ""){
                         print("empty")
+              
+
                     }else{
                         saveTask()
                         self.title = ""
@@ -139,17 +144,14 @@ struct ContentView: View {
                 }
                 
                 .padding(10)
-//                .frame(maxWidth: .infinity)
+                .frame(width: 200)
                 
                 .background(.blue)
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
             }
-//            .padding()
-            .navigationTitle("All Tasks")
         }
     }
-}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
