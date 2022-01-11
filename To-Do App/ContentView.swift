@@ -145,6 +145,7 @@ struct ContentView: View {
                 .foregroundColor(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
             }
+//            .padding()
             .navigationTitle("All Tasks")
         }
     }
