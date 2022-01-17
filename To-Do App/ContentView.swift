@@ -91,6 +91,8 @@ struct ContentView: View {
         }
     }
     
+
+    
     var body: some View {
        
             VStack{
@@ -116,13 +118,20 @@ struct ContentView: View {
                                       .frame(width: 15, height: 15)
                                     Spacer().frame(width: 20)
                                     Text(task.tile ?? "")
+
+    
                                     
                                     Spacer()
-                                    Image(systemName: task.isFavorite ? "heart.fill": "heart")
-                                        .foregroundColor(.red)
+                                    Image(systemName: task.isFavorite ? "checkmark.square": "square")
+                                        .font(.title2)
                                         .onTapGesture {
                                             updateTask(task)
+                                            
+                                    
                                         }
+                    
+                                    
+                                    
                                 }
                         }.onDelete(perform: deleteTask)
                     }
